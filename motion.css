@@ -1,0 +1,68 @@
+/* Motion stays on transforms/opacity; all content remains usable without JS. */
+:root{--motion-ease:cubic-bezier(.22,1,.36,1)}
+.motion-line{display:inline-block;max-width:100%;vertical-align:top}
+.motion-ready .motion-enter:not(.motion-seen){opacity:0;transform:translateY(25px)}
+.motion-enter{transition:opacity .8s var(--motion-ease),transform .8s var(--motion-ease);transition-delay:var(--enter-delay,0ms)}
+.motion-ready .motion-heading:not(.motion-seen) .motion-line{opacity:0;transform:translateY(26px);filter:blur(4px)}
+.motion-heading .motion-line{transition:transform .9s var(--motion-ease),opacity .9s var(--motion-ease),filter .7s ease;transition-delay:var(--line-delay,0ms)}
+.type-char{display:inline-block;white-space:pre;vertical-align:baseline}
+.motion-ready .motion-typing:not(.motion-seen) .type-char{opacity:0;transform:translateY(8px)}
+.motion-typing.motion-seen .type-char{animation:type-arrive .5s var(--motion-ease) both;animation-delay:var(--char-delay,0ms)}
+.hero h1.motion-heading{opacity:1;transform:none}
+.hero h1>.motion-line:not(.hero-english){color:inherit}
+.section.motion-divider{position:relative;border-top-color:transparent}
+.section.motion-divider:before{content:"";position:absolute;left:0;right:0;top:-1px;height:1px;background:var(--line);transform-origin:left;transition:transform 1.2s var(--motion-ease)}
+.motion-ready .motion-divider:not(.motion-seen):before{transform:scaleX(0)}
+.rolling-number{white-space:nowrap;font-variant-numeric:tabular-nums}
+.rolling-digit{display:inline-block;position:relative;width:.56em;height:1.15em;overflow:hidden;vertical-align:-.12em}
+.rolling-track{display:block;transform:translateY(-66.6666667%)}
+.rolling-track>span{display:block;height:1.15em;line-height:1.15;text-align:center}
+.metric-row strong .rolling-number,.metric-row strong .rolling-digit,.metric-row strong .rolling-track,.metric-row strong .rolling-track>span{font-size:inherit;color:inherit;text-align:inherit}
+.motion-counter.motion-seen .rolling-track{animation:digit-arrive 1.15s var(--motion-ease) both;animation-delay:var(--digit-delay,0ms)}
+.motion-counter strong{font-variant-numeric:tabular-nums}
+.capability-tabs{position:relative}
+.capability-tabs.tabs-motion button:after{display:none}
+.tab-ink{position:absolute;height:3px;background:var(--blue);bottom:-1px;left:0;pointer-events:none;transition:transform .55s var(--motion-ease),width .55s var(--motion-ease)}
+.nav{position:relative}
+.nav.nav-motion a[aria-current]:after{display:none}
+.nav-ink{position:absolute;left:0;bottom:0;height:1px;background:var(--blue);pointer-events:none;opacity:0;transition:transform .45s var(--motion-ease),width .45s var(--motion-ease),opacity .2s}
+.motion-panel .capability-intro,.motion-panel .capability-evidence a{animation:content-arrive .55s var(--motion-ease) both;animation-delay:var(--panel-delay,0ms)}
+.motion-filter-item{animation:content-arrive .48s var(--motion-ease) both!important;animation-delay:var(--filter-delay,0ms)!important}
+.project-evidence.motion-surface{position:relative;isolation:isolate;transform:perspective(1100px) rotateX(var(--tilt-x,0deg)) rotateY(var(--tilt-y,0deg));transition:transform .5s var(--motion-ease),background .35s;transform-origin:center}
+.motion-surface:after{content:"";position:absolute;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(260px circle at var(--light-x,50%) var(--light-y,50%),#ffffffbb,transparent 80%);opacity:0;transition:opacity .45s}
+.motion-surface.is-pointed:after{opacity:1}
+.project-evidence .metric-row{position:relative}
+.project-evidence .metric-row:after{content:"";height:1px;position:absolute;bottom:-1px;left:0;right:0;background:currentColor;opacity:.35;transform:scaleX(0);transform-origin:left;transition:transform .6s var(--motion-ease)}
+.project:hover .metric-row:after{transform:scaleX(1)}
+.project:hover .metric-row:nth-of-type(2):after{transition-delay:80ms}
+.project:hover .metric-row:nth-of-type(3):after{transition-delay:160ms}
+.skill-line li,.project-tags .tag,.method-flow span{transition:transform .3s var(--motion-ease),border-color .3s,background .3s,color .3s}
+.method-flow i{transition:transform .4s var(--motion-ease),color .4s}
+.project:hover .method-flow i{transform:translateX(3px);color:var(--blue)}
+.contact-nav>span,.email>span{display:inline-block;transition:transform .35s var(--motion-ease)}
+.contact-nav:hover>span,.email:hover>span{transform:translate(3px,-3px)}
+.campus-item{transition:border-color .35s}
+.campus-item h3{transition:color .35s}
+.campus-item:hover{border-color:#a0b3df}
+.campus-item:hover h3{color:var(--blue)}
+details.motion-details{overflow:hidden}
+details.motion-details[open]>.details-body{animation:none}
+.motion-magnet{translate:var(--magnet-x,0px) var(--magnet-y,0px);transition:translate .4s var(--motion-ease),background .22s,color .22s,box-shadow .22s,transform .22s}
+@keyframes type-arrive{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes digit-arrive{from{transform:translateY(0)}to{transform:translateY(-66.6666667%)}}
+@keyframes content-arrive{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@media(hover:hover) and (pointer:fine){
+  .skill-line li:hover,.project-tags .tag:hover{transform:translateY(-4px);border-color:#90a7d9;background:#e8eefb;color:var(--blue)}
+  .method-flow span:hover{transform:translateY(-3px);background:white;border-color:#90a7d9}
+  .motion-surface.is-pointed{transition:transform .15s ease-out,background .35s}
+}
+@media(prefers-reduced-motion:reduce){
+  .motion-ready .motion-enter:not(.motion-seen),.motion-ready .motion-heading:not(.motion-seen) .motion-line,.motion-ready .motion-typing:not(.motion-seen) .type-char{opacity:1;transform:none;filter:none}
+  .motion-ready .motion-divider:not(.motion-seen):before{transform:none}
+  .project-evidence.motion-surface,.motion-magnet{transform:none;translate:none}
+}
+@media print{
+  .motion-ready .motion-enter:not(.motion-seen),.motion-ready .motion-heading:not(.motion-seen) .motion-line,.motion-ready .motion-typing:not(.motion-seen) .type-char{opacity:1;transform:none;filter:none}
+  .rolling-track{animation:none!important;transform:translateY(-66.6666667%)!important}
+  .motion-divider:before,.tab-ink,.nav-ink{display:none}
+}
